@@ -21,17 +21,20 @@ const PORT = 8080
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//ROUTES
+
+//******************************************** */
+///////////////////ROUTES////////////////////////
+//******************************************** */
+//HOME PAGE
 app.get('/', (req, res) => {
   res.render('home');
 });
+//PROJECTS INDEX
+app.get('/projects', async (req, res) => {
+  const projects = await Project.find({});
+  res.render('projects/index', { projects } );
+});
 
-//TEST ROUTE
-app.get('/newproject', async (req, res) => {
-  const project = new Project({title: 'Rubber Duck Debugging', craft: 'Crochet'})
-  await project.save();
-  res.send(project);
-})
 
 
 //ERROR ROUTE 
