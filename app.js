@@ -29,13 +29,16 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   res.render('home');
 });
-//PROJECTS INDEX
+//PROJECTS INDEX - ALL PROJECTS
 app.get('/projects', async (req, res) => {
   const projects = await Project.find({});
   res.render('projects/index', { projects } );
 });
-
-
+//SHOW - PROJECT DETAIL PAGE
+app.get('/projects/:id', async (req, res) => {
+  const project = await Project.findById(req.params.id)
+  res.render('projects/show', { project });
+});
 
 //ERROR ROUTE 
 app.get('*', (req, res) => {
