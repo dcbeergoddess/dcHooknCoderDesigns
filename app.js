@@ -21,6 +21,10 @@ const PORT = 8080
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//******************************************** */
+/////////////////MIDDLEWARE//////////////////////
+//******************************************** */
+app.use(express.urlencoded({extended: true}))
 
 //******************************************** */
 ///////////////////ROUTES////////////////////////
@@ -34,6 +38,17 @@ app.get('/projects', async (req, res) => {
   const projects = await Project.find({});
   res.render('projects/index', { projects } );
 });
+//NEW FORM
+app.get('/projects/new', (req, res) => {
+  res.render('projects/new')
+})
+//POST PROJECTS
+app.post('/projects', async (req, res) => {
+  // res.send(req.body) --> test
+  const project = new Project(req.body.project);
+  await project.save();
+  res.redirect(`projects/${project._id}`);
+})
 //SHOW - PROJECT DETAIL PAGE
 app.get('/projects/:id', async (req, res) => {
   const project = await Project.findById(req.params.id)

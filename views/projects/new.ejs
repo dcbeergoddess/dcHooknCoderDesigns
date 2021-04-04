@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEW</title>
+</head>
+<body>
+  <form action="/projects" method="POST">
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="project[title]">
+    </div>
+    <div>
+      <label for="craft">Craft:</label>
+      <input type="text" id="craft" name="project[craft]">
+    </div>
+    <div>
+      <label for="yarnCategory">Yarn Weight Category:</label>
+      <input type="text" id="yarnCategory" name="project[yarnCategory]">
+    </div>
+    <div>
+      <label for="tool">Project Tool & Size:</label>
+      <input type="text" id="tool" name="project[tool]">
+    </div>
+    <button>Add Project</button>
+  </form>
+  <a href="/projects">All Projects</a>
+</body>
+</html>
