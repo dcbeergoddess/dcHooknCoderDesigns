@@ -13,9 +13,16 @@
     <li><%= project.yarnCategory %> </li>
     <li><%= project.tool %> </li>
   </ul>
+  <p>
+    <a href="/projects/<%= project.id %>/edit">Update Project</a>
+  </p>
+  <p>
+    <form action="/projects/<%= project.id %>?_method=DELETE" method="POST">
+      <button>Delete</button>
+    </form>
+  </p>
 
   <footer>
-    <a href="/projects/<%= project.id %>/edit ">Update Project</a>
     <a href="/projects">All Projects</a>
   </footer>
 </body>

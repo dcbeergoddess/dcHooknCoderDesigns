@@ -43,14 +43,14 @@ app.get('/projects', async (req, res) => {
 //NEW FORM
 app.get('/projects/new', (req, res) => {
   res.render('projects/new')
-})
+});
 //POST PROJECTS
 app.post('/projects', async (req, res) => {
   // res.send(req.body) --> test
   const project = new Project(req.body.project);
   await project.save();
   res.redirect(`projects/${project._id}`);
-})
+});
 //SHOW - PROJECT DETAIL PAGE
 app.get('/projects/:id', async (req, res) => {
   const project = await Project.findById(req.params.id)
@@ -67,6 +67,12 @@ app.put('/projects/:id', async (req, res) => {
   const project = await Project.findByIdAndUpdate(id, {...req.body.project}, {new: true});
   res.redirect(`${project._id}`)
 });
+//DELETE ROUTE
+app.delete('/projects/:id', async (req, res) => {
+  const { id } = req.params;
+  await Project.findByIdAndDelete(id);
+  res.redirect('/projects');
+})
 
 //ERROR ROUTE 
 app.get('*', (req, res) => {
