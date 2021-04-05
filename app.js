@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const Project = require('./models/project')
+const methodOverride = require('method-override');
+const Project = require('./models/project');
 
 mongoose.connect('mongodb://localhost:27017/hook-coder-designs', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
-})
+});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -24,7 +25,8 @@ app.set('view engine', 'ejs');
 //******************************************** */
 /////////////////MIDDLEWARE//////////////////////
 //******************************************** */
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 //******************************************** */
 ///////////////////ROUTES////////////////////////
@@ -54,11 +56,22 @@ app.get('/projects/:id', async (req, res) => {
   const project = await Project.findById(req.params.id)
   res.render('projects/show', { project });
 });
+//EDIT FORM
+app.get('/projects/:id/edit', async (req, res) => {
+  const project = await Project.findById(req.params.id)
+  res.render('projects/edit', { project });
+});
+//PUT ROUTE
+app.put('/projects/:id', async (req, res) => {
+  const { id } = req.params;
+  const project = await Project.findByIdAndUpdate(id, {...req.body.project}, {new: true});
+  res.redirect(`${project._id}`)
+});
 
 //ERROR ROUTE 
 app.get('*', (req, res) => {
   res.send(`I DO NOT KNOW THAT PATH!!!!`)
-})
+});
 //Listener
 app.listen(PORT, () => {
   console.log(`LISTENING ON http://localhost:${PORT}` )
