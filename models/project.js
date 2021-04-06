@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const ProjectSchema = new Schema ({
   title: String,
+  image: String,
   craft: String,
   yarnCategory: String,
   tool: String

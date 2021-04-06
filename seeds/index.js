@@ -16,72 +16,82 @@ db.once('open', () => {
 const samplePs = [
   {
     title: 'Rubber Duck',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook'
   },
   {
     title: 'Baby Cardigan',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'knit',
     yarnCategory: 'sport',
     tool: '3.75 Circular Needles'
   },
   {
     title: 'Yoda',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook'
   },
   {
     title: 'Mando',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook'
   },
   {
     title: 'Dalmatian',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook'
   },
   {
     title: 'Annie Afghan',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '5.5mm Hook'
   },
   {
     title: 'Rub-a-Dub Towel',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'knit',
     yarnCategory: 'light worsted',
     tool: '5mm circular hooks'
   },
   {
     title: 'Convertible Wrap',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '5mm Hook'
   },
   {
     title: 'Veggies',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook'
   },
   {
     title: 'Sven',
+    image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'light worsted',
     tool: '4mm Hook'
   }
 ]
 
-Project.insertMany(samplePs)
-  .then(res => {
-    console.log(res)
-  })
-  .catch(e => {
-    console.log(e)
-  });
+const seedDB = async () => {
+  await Project.deleteMany({});
+  await Project.insertMany(samplePs)
+  };
 
-mongoose.connection.close();
+
+seedDB().then(() => {
+    mongoose.connection.close();
+});
