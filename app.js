@@ -23,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 //******************************************** */
-/////////////////MIDDLEWARE//////////////////////
+///////////MONGOOSE MIDDLEWARE///////////////////
 //******************************************** */
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
