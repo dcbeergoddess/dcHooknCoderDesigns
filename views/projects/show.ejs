@@ -1,20 +1,37 @@
 <% layout('layouts/boilerplate') %> 
-  <h1><%= project.title %> </h1>
-  <img src="<%= project.image %>/400x400" alt="project image">
-  <ul>
-    <li><%= project.craft %> </li>
-    <li><%= project.yarnCategory %> </li>
-    <li><%= project.tool %> </li>
-  </ul>
-  <p>
-    <a href="/projects/<%= project.id %>/edit">Edit Project</a>
-  </p>
-  <p>
-    <form action="/projects/<%= project.id %>?_method=DELETE" method="POST">
-      <button>Delete</button>
-    </form>
-  </p>
+<div class="row">
+  <div class="col-6 offset-3">
+    <div class="card mb-3">
+      <img src="<%= project.image %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= project.title %></h5>
+        <!-- Possible add description to project model later -->
+        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>Craft:</b>
+        </b>
+        </b> <%= project.craft %></li>
+        <li class="list-group-item"><b>Yarn Weight:</b>
+        </b>
+        </b> <%= project.yarnCategory %></li>
+        <li class="list-group-item"><b>Project Tool & Size:</b>
+        </b>
+        </b> <%= project.tool %></li>
+      </ul>
+      <div class="card-body">
+        <a class="btn btn-info" href="/projects/<%= project.id %>/edit" class="card-link">Edit Project</a>
+        <form class="d-inline" action="/projects/<%= project.id %>?_method=DELETE" method="POST">
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+      <footer class="card-footer text-muted">
+        2 days ago
+        <!-- <a href="/projects">All Projects</a> -->
+      </footer>
+    </div>
+  </div>
+</div>
 
-  <footer>
-    <a href="/projects">All Projects</a>
-  </footer>
+
+
