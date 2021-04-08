@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const engine = require('ejs-mate')
+const catchAsync = require('./utils/catchAsync')
 const methodOverride = require('method-override');
 const Project = require('./models/project');
 
@@ -38,47 +39,43 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 //PROJECTS INDEX - ALL PROJECTS
-app.get('/projects', async (req, res) => {
+app.get('/projects', catchAsync(async (req, res) => {
   const projects = await Project.find({});
   res.render('projects/index', { projects } );
-});
+}));
 //NEW FORM
 app.get('/projects/new', (req, res) => {
   res.render('projects/new')
 });
 //POST PROJECTS
-app.post('/projects', async (req, res, next) => {
-  try {
+app.post('/projects', catchAsync(async (req, res, next) => {
   // res.send(req.body) --> test
   const project = new Project(req.body.project);
   await project.save();
   res.redirect(`projects/${project._id}`);
-  } catch(e) {
-    next(e);
-  }
-});
+}));
 //SHOW - PROJECT DETAIL PAGE
-app.get('/projects/:id', async (req, res) => {
+app.get('/projects/:id', catchAsync(async (req, res) => {
   const project = await Project.findById(req.params.id)
   res.render('projects/show', { project });
-});
+}));
 //EDIT FORM
-app.get('/projects/:id/edit', async (req, res) => {
+app.get('/projects/:id/edit', catchAsync(async (req, res) => {
   const project = await Project.findById(req.params.id)
   res.render('projects/edit', { project });
-});
+}));
 //PUT ROUTE
-app.put('/projects/:id', async (req, res) => {
+app.put('/projects/:id', catchAsync(async (req, res) => {
   const { id } = req.params;
   const project = await Project.findByIdAndUpdate(id, {...req.body.project}, {new: true});
   res.redirect(`${project._id}`)
-});
+}));
 //DELETE ROUTE
-app.delete('/projects/:id', async (req, res) => {
+app.delete('/projects/:id', catchAsync(async (req, res) => {
   const { id } = req.params;
   await Project.findByIdAndDelete(id);
   res.redirect('/projects');
-})
+}));
 
 //******************************************** */
 //////BASIC EXPRESS ERROR HANDLER////////////////
