@@ -5,6 +5,7 @@ const engine = require('ejs-mate')
 const catchAsync = require('./utils/catchAsync')
 const methodOverride = require('method-override');
 const Project = require('./models/project');
+const ExpressError = require('./utils/ExpressError');
 
 mongoose.connect('mongodb://localhost:27017/hook-coder-designs', {
   useNewUrlParser: true,
@@ -50,6 +51,7 @@ app.get('/projects/new', (req, res) => {
 //POST PROJECTS
 app.post('/projects', catchAsync(async (req, res, next) => {
   // res.send(req.body) --> test
+  if(!req.body.project) throw new ExpressError('Invalid Project Data', 400);
   const project = new Project(req.body.project);
   await project.save();
   res.redirect(`projects/${project._id}`);
@@ -78,10 +80,18 @@ app.delete('/projects/:id', catchAsync(async (req, res) => {
 }));
 
 //******************************************** */
+/////////////BASIC 404 ERROR/////////////////////
+//******************************************** */
+app.all('*', (req, res, next) => {
+  next(new ExpressError('Page Not Found', 404))
+});
+
+//******************************************** */
 //////BASIC EXPRESS ERROR HANDLER////////////////
 //******************************************** */
 app.use((err, req, res, next) => {
-  res.send('OH BOY SOMETHING WENT WRONG')
+  const { statusCode = 500, message = 'Something went wrong' } = err;
+  res.status(statusCode).send(message);
 });
 //******************************************** */
 /////////////////LISTENER////////////////////////
