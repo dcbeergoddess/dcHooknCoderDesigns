@@ -3,26 +3,41 @@
     <h1 class="text-center">New Project</h1>
     <!-- col-6 => don't want all the way to left => offset-3 -->
     <div class="col-6 offset-3">
-      <form action="/projects" method="POST">
+      <form action="/projects" method="POST" class="needs-validation" novalidate>
         <div class="mb-3">
           <label class="form-label" for="title">Title:</label>
-          <input class="form-control" type="text" id="title" name="project[title]">
+          <input class="form-control" type="text" id="title" name="project[title]" required>
+          <div class="valid-feedback">
+            Looks Good!
+          </div>
         </div>
         <div>
           <label class="form-label" for="craft">Craft:</label>
-          <input class="form-control" type="text" id="craft" name="project[craft]">
+          <input class="form-control" type="text" id="craft" name="project[craft]" required>
+                  <div class="valid-feedback">
+          Looks Good!
+        </div>
         </div>
         <div>
           <label class="form-label" for="image">Image URL:</label>
-          <input class="form-control" type="text" id="image" name="project[image]">
+          <input class="form-control" type="text" id="image" name="project[image]" required>
+                  <div class="valid-feedback">
+          Looks Good!
+        </div>
         </div>
         <div class="mb-3">
           <label class="form-label" or="yarnCategory">Yarn Weight Category:</label>
-          <input class="form-control" type="text" id="yarnCategory" name="project[yarnCategory]">
+          <input class="form-control" type="text" id="yarnCategory" name="project[yarnCategory]" required>
+                  <div class="valid-feedback">
+          Looks Good!
+        </div>
         </div>
         <div class="mb-3">
           <label class="form-label" for="tool">Project Tool & Size:</label>
-          <input class="form-control" type="text" id="tool" name="project[tool]">
+          <input class="form-control" type="text" id="tool" name="project[tool]" required>
+                  <div class="valid-feedback">
+          Looks Good!
+        </div>
         </div>
         <div class="mb-3">
           <button class="btn btn-success">Add Project</button>
