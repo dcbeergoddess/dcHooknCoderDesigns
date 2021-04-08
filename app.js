@@ -47,11 +47,15 @@ app.get('/projects/new', (req, res) => {
   res.render('projects/new')
 });
 //POST PROJECTS
-app.post('/projects', async (req, res) => {
+app.post('/projects', async (req, res, next) => {
+  try {
   // res.send(req.body) --> test
   const project = new Project(req.body.project);
   await project.save();
   res.redirect(`projects/${project._id}`);
+  } catch(e) {
+    next(e);
+  }
 });
 //SHOW - PROJECT DETAIL PAGE
 app.get('/projects/:id', async (req, res) => {
@@ -76,11 +80,15 @@ app.delete('/projects/:id', async (req, res) => {
   res.redirect('/projects');
 })
 
-//ERROR ROUTE 
-app.get('*', (req, res) => {
-  res.send(`I DO NOT KNOW THAT PATH!!!!`)
+//******************************************** */
+//////BASIC EXPRESS ERROR HANDLER////////////////
+//******************************************** */
+app.use((err, req, res, next) => {
+  res.send('OH BOY SOMETHING WENT WRONG')
 });
-//Listener
+//******************************************** */
+/////////////////LISTENER////////////////////////
+//******************************************** */
 app.listen(PORT, () => {
   console.log(`LISTENING ON http://localhost:${PORT}` )
 }); 
