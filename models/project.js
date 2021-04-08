@@ -6,7 +6,8 @@ const ProjectSchema = new Schema ({
   image: String,
   craft: String,
   yarnCategory: String,
-  tool: String
+  tool: String,
+  toolSize: Number,
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
