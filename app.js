@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const engine = require('ejs-mate')
-const catchAsync = require('./utils/catchAsync')
+const engine = require('ejs-mate');
+const Joi = require('joi');
+// const { projectSchema } = require('./schemas.js')
+const catchAsync = require('./utils/catchAsync');
 const methodOverride = require('method-override');
 const Project = require('./models/project');
 const ExpressError = require('./utils/ExpressError');
@@ -31,6 +33,18 @@ app.set('view engine', 'ejs');
 //******************************************** */
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+//******************************************** */
+//////////////JOI MIDDLEWARE/////////////////////
+//******************************************** */
+// const validateProject = (req, res, next) => {
+//   const { error } = projectSchema.validate(req.body);
+//   if(error) {
+//     const msg = error.details.map(el => el.message).join(',')
+//     throw new ExpressError(msg, 400)
+//   } else {
+//     next();
+//   }
+// };
 
 //******************************************** */
 ///////////////////ROUTES////////////////////////
@@ -50,8 +64,16 @@ app.get('/projects/new', (req, res) => {
 });
 //POST PROJECTS
 app.post('/projects', catchAsync(async (req, res, next) => {
-  // res.send(req.body) --> test
-  if(!req.body.project) throw new ExpressError('Invalid Project Data', 400);
+  const projectSchema = Joi.object ({
+    project: Joi.object({
+      title: Joi.string().required(),
+      craft: Joi.string().required()
+    }).required()
+  })
+  const result = projectSchema.validate(req.body);
+  if(result.error){
+    throw new ExpressError(result.error.details, 400)
+  }
   const project = new Project(req.body.project);
   await project.save();
   res.redirect(`projects/${project._id}`);
@@ -90,8 +112,9 @@ app.all('*', (req, res, next) => {
 //////BASIC EXPRESS ERROR HANDLER////////////////
 //******************************************** */
 app.use((err, req, res, next) => {
-  const { statusCode = 500, message = 'Something went wrong' } = err;
-  res.status(statusCode).render('error');
+  const { statusCode = 500 } = err;
+  if(!err.message) err.message = 'Oh No, Something Went Wrong!'
+  res.status(statusCode).render('error', { err });
 });
 //******************************************** */
 /////////////////LISTENER////////////////////////
