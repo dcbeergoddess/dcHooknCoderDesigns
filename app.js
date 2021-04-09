@@ -36,15 +36,26 @@ app.use(methodOverride('_method'));
 //******************************************** */
 //////////////JOI MIDDLEWARE/////////////////////
 //******************************************** */
-// const validateProject = (req, res, next) => {
-//   const { error } = projectSchema.validate(req.body);
-//   if(error) {
-//     const msg = error.details.map(el => el.message).join(',')
-//     throw new ExpressError(msg, 400)
-//   } else {
-//     next();
-//   }
-// };
+const validateProject = (req, res, next) => {
+  const projectSchema = Joi.object ({
+    project: Joi.object({
+      title: Joi.string().required(),
+      image: Joi.string().required(),
+      craft: Joi.string().required(),
+      yarnCategory: Joi.string().required(),
+      tool: Joi.string().required(),
+      toolSize: Joi.number().required().min(0)
+    }).required()
+  })
+  //Deconstruct error from response
+  const { error } = projectSchema.validate(req.body);
+  if(error){
+    const msg = error.details.map(el => el.message).join(',');
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
 
 //******************************************** */
 ///////////////////ROUTES////////////////////////
@@ -63,19 +74,7 @@ app.get('/projects/new', (req, res) => {
   res.render('projects/new')
 });
 //POST PROJECTS
-app.post('/projects', catchAsync(async (req, res, next) => {
-  const projectSchema = Joi.object ({
-    project: Joi.object({
-      title: Joi.string().required(),
-      craft: Joi.string().required()
-    }).required()
-  })
-  //Deconstruct error from response
-  const { error } = projectSchema.validate(req.body);
-  if(error){
-    const msg = error.details.map(el => el.message).join(',');
-    throw new ExpressError(msg, 400);
-  }
+app.post('/projects', validateProject, catchAsync(async (req, res, next) => {
   const project = new Project(req.body.project);
   await project.save();
   res.redirect(`projects/${project._id}`);
