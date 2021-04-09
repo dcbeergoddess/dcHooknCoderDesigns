@@ -70,9 +70,11 @@ app.post('/projects', catchAsync(async (req, res, next) => {
       craft: Joi.string().required()
     }).required()
   })
-  const result = projectSchema.validate(req.body);
-  if(result.error){
-    throw new ExpressError(result.error.details, 400)
+  //Deconstruct error from response
+  const { error } = projectSchema.validate(req.body);
+  if(error){
+    const msg = error.details.map(el => el.message).join(',');
+    throw new ExpressError(msg, 400);
   }
   const project = new Project(req.body.project);
   await project.save();
