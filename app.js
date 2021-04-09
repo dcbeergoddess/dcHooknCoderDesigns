@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const engine = require('ejs-mate');
-const Joi = require('joi');
-// const { projectSchema } = require('./schemas.js')
+const { projectSchema } = require('./schemas.js')
 const catchAsync = require('./utils/catchAsync');
 const methodOverride = require('method-override');
 const Project = require('./models/project');
@@ -37,16 +36,6 @@ app.use(methodOverride('_method'));
 //////////////JOI MIDDLEWARE/////////////////////
 //******************************************** */
 const validateProject = (req, res, next) => {
-  const projectSchema = Joi.object ({
-    project: Joi.object({
-      title: Joi.string().required(),
-      image: Joi.string().required(),
-      craft: Joi.string().required(),
-      yarnCategory: Joi.string().required(),
-      tool: Joi.string().required(),
-      toolSize: Joi.number().required().min(0)
-    }).required()
-  })
   //Deconstruct error from response
   const { error } = projectSchema.validate(req.body);
   if(error){
