@@ -90,6 +90,10 @@ app.delete('/projects/:id', catchAsync(async (req, res) => {
   await Project.findByIdAndDelete(id);
   res.redirect('/projects');
 }));
+//POST COMMENT TO PROJECT SHOW PAGE
+app.post('/projects/:id/comments', catchAsync(async (req, res) => {
+  res.send('YOU MADE A COMMENT');
+}));
 
 //******************************************** */
 /////////////BASIC 404 ERROR/////////////////////
