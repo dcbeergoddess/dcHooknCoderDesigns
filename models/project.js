@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema ({
   title: String,
@@ -8,6 +8,12 @@ const ProjectSchema = new Schema ({
   yarnCategory: String,
   tool: String,
   toolSize: Number,
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
+  ]
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
