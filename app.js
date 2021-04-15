@@ -6,6 +6,7 @@ const { projectSchema } = require('./schemas.js')
 const catchAsync = require('./utils/catchAsync');
 const methodOverride = require('method-override');
 const Project = require('./models/project');
+const Comment = require('./models/comment')
 const ExpressError = require('./utils/ExpressError');
 
 mongoose.connect('mongodb://localhost:27017/hook-coder-designs', {
@@ -92,7 +93,14 @@ app.delete('/projects/:id', catchAsync(async (req, res) => {
 }));
 //POST COMMENT TO PROJECT SHOW PAGE
 app.post('/projects/:id/comments', catchAsync(async (req, res) => {
-  res.send('YOU MADE A COMMENT');
+  console.log(req.body);
+  res.send("YOU MADE A COMMENT!!!")
+  // const project = await Project.findById(req.body);
+  // const comment = new Comment(req.body.comment);
+  // project.comments.push(comment);
+  // await comment.save();
+  // await project.save();
+  // res.redirect(`/projects/${project._id}`)
 }));
 
 //******************************************** */
