@@ -93,14 +93,14 @@ app.delete('/projects/:id', catchAsync(async (req, res) => {
 }));
 //POST COMMENT TO PROJECT SHOW PAGE
 app.post('/projects/:id/comments', catchAsync(async (req, res) => {
-  console.log(req.body);
-  res.send("YOU MADE A COMMENT!!!")
-  // const project = await Project.findById(req.body);
-  // const comment = new Comment(req.body.comment);
-  // project.comments.push(comment);
-  // await comment.save();
-  // await project.save();
-  // res.redirect(`/projects/${project._id}`)
+  // console.log(req.body);
+  // res.send("YOU MADE A COMMENT!!!")
+  const project = await Project.findById(req.params.id);
+  const comment = new Comment(req.body.comment);
+  project.comments.push(comment);
+  await comment.save();
+  await project.save();
+  res.redirect(`/projects/${project._id}`)
 }));
 
 //******************************************** */
