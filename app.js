@@ -115,6 +115,10 @@ app.post('/projects/:id/comments', validateComment, catchAsync(async (req, res) 
   await project.save();
   res.redirect(`/projects/${project._id}`)
 }));
+//DELETE COMMENT
+app.delete('/projects/:id/comments/:commentId', catchAsync(async (req, res) => {
+  res.send("i hit it")
+}));
 
 //******************************************** */
 /////////////BASIC 404 ERROR/////////////////////

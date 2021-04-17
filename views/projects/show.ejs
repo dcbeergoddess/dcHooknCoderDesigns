@@ -53,6 +53,9 @@
             <p class="card-text">
               <%= comment.body %>
             </p>
+            <form action="/projects/<%=project._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+              <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
           </div>
           <footer class="card-footer text-muted">
             2 days ago
