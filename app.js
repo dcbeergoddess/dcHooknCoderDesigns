@@ -117,7 +117,12 @@ app.post('/projects/:id/comments', validateComment, catchAsync(async (req, res) 
 }));
 //DELETE COMMENT
 app.delete('/projects/:id/comments/:commentId', catchAsync(async (req, res) => {
-  res.send("i hit it")
+  //DESTRUCTURE FROM REQ.PARAMS
+  const { id, commentId } = req.params;
+  //use $pull -> removes from array on specified condition
+  await Project.findByIdAndUpdate(id, { $pull: { comments: commentId } });
+  await Comment.findByIdAndDelete(commentId);
+  res.redirect(`/projects/${id}`);
 }));
 
 //******************************************** */
