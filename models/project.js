@@ -16,5 +16,11 @@ const ProjectSchema = new Schema ({
   ]
 });
 
+//DELETE MIDDLEWARE
+ProjectSchema.post('findOneAndDelete', async function (doc) {
+  console.log(doc)
+  console.log('DELETED!!!!')
+});
+
 module.exports = mongoose.model('Project', ProjectSchema);
 
