@@ -1,5 +1,6 @@
 const Joi = require('joi');
 
+//PROJECT VALIDATION
 module.exports.projectSchema = Joi.object ({
   project: Joi.object({
     title: Joi.string().required(),
@@ -8,5 +9,12 @@ module.exports.projectSchema = Joi.object ({
     yarnCategory: Joi.string().required(),
     tool: Joi.string().required(),
     toolSize: Joi.number().required().min(0)
+  }).required()
+});
+
+//COMMENT VALIDATION
+module.exports.commentSchema = Joi.object({
+  comment: Joi.object({
+    body: Joi.string().required()
   }).required()
 });

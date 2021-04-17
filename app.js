@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const engine = require('ejs-mate');
-const { projectSchema } = require('./schemas.js')
+const { projectSchema, commentSchema } = require('./schemas.js')
 const catchAsync = require('./utils/catchAsync');
 const methodOverride = require('method-override');
 const Project = require('./models/project');
@@ -36,9 +36,21 @@ app.use(methodOverride('_method'));
 //******************************************** */
 //////////////JOI MIDDLEWARE/////////////////////
 //******************************************** */
+//PROJECT VALIDATION
 const validateProject = (req, res, next) => {
   //Deconstruct error from response
   const { error } = projectSchema.validate(req.body);
+  if(error){
+    const msg = error.details.map(el => el.message).join(',');
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+//COMMENT VALIDATION
+const validateComment = (req, res, next) => {
+  //Deconstruct error from response
+  const { error } = commentSchema.validate(req.body);
   if(error){
     const msg = error.details.map(el => el.message).join(',');
     throw new ExpressError(msg, 400);
@@ -92,7 +104,7 @@ app.delete('/projects/:id', catchAsync(async (req, res) => {
   res.redirect('/projects');
 }));
 //POST COMMENT TO PROJECT SHOW PAGE
-app.post('/projects/:id/comments', catchAsync(async (req, res) => {
+app.post('/projects/:id/comments', validateComment, catchAsync(async (req, res) => {
   // console.log(req.body);
   // res.send("YOU MADE A COMMENT!!!")
   const project = await Project.findById(req.params.id);
