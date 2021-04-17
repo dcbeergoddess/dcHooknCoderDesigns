@@ -83,7 +83,8 @@ app.post('/projects', validateProject, catchAsync(async (req, res, next) => {
 }));
 //SHOW - PROJECT DETAIL PAGE
 app.get('/projects/:id', catchAsync(async (req, res) => {
-  const project = await Project.findById(req.params.id)
+  const project = await Project.findById(req.params.id).populate('comments');
+  console.log(project)
   res.render('projects/show', { project });
 }));
 //EDIT FORM
