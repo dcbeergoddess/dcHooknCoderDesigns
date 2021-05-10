@@ -2,11 +2,10 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const engine = require('ejs-mate');
-const catchAsync = require('./utils/catchAsync');
+const session = require('express-session');
 const methodOverride = require('method-override');
-const Project = require('./models/project');
-const Comment = require('./models/comment')
 const ExpressError = require('./utils/ExpressError');
+
 //ROUTERS
 const projectRoutes = require('./routes/projects');
 const commentRoutes = require('./routes/comments');
@@ -37,7 +36,17 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 //SERVE UP PUBLIC FILE
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+//******************************************** */
+////////////SESSION MIDDLEWARE///////////////////
+//******************************************** */
+const sessionConfig = {
+  secret: 'thishouldbeabettersecret!',
+  resave: false,
+  saveUninitialized: true
+};
+app.use(session(sessionConfig));
 
 //******************************************** */
 /////////////ROUTER MIDDLEWARE///////////////////
