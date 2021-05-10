@@ -36,13 +36,13 @@ router.get('/new', (req, res) => {
 router.post('/', validateProject, catchAsync(async (req, res, next) => {
   const project = new Project(req.body.project);
   await project.save();
-  req.flash('success', 'Successfully Added a New Project');
+  req.flash('success', 'Successfully Added a New Project!');
   res.redirect(`projects/${project._id}`);
 }));
 //SHOW - PROJECT DETAIL PAGE
 router.get('/:id', catchAsync(async (req, res) => {
   const project = await Project.findById(req.params.id).populate('comments');
-  // console.log(project)
+  req.flash('error', 'Cannot Find That Campground')
   res.render('projects/show', { project });
 }));
 //EDIT FORM
