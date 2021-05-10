@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const engine = require('ejs-mate');
 const session = require('express-session');
+const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const ExpressError = require('./utils/ExpressError');
 
@@ -54,6 +55,16 @@ const sessionConfig = {
   }
 };
 app.use(session(sessionConfig));
+//******************************************** */
+//////////////FLASH MIDDLEWARE///////////////////
+//******************************************** */
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 //******************************************** */
 /////////////ROUTER MIDDLEWARE///////////////////

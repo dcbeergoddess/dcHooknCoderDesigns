@@ -32,10 +32,11 @@ router.get('/', catchAsync(async (req, res) => {
 router.get('/new', (req, res) => {
   res.render('projects/new')
 });
-//POST PROJECTS
+//POST NEW PROJECT
 router.post('/', validateProject, catchAsync(async (req, res, next) => {
   const project = new Project(req.body.project);
   await project.save();
+  req.flash('success', 'Successfully Added a New Project');
   res.redirect(`projects/${project._id}`);
 }));
 //SHOW - PROJECT DETAIL PAGE
