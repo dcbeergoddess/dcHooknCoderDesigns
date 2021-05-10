@@ -14,7 +14,8 @@ const commentRoutes = require('./routes/comments');
 mongoose.connect('mongodb://localhost:27017/hook-coder-designs', {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 const db = mongoose.connection;
@@ -35,6 +36,8 @@ app.set('view engine', 'ejs');
 //******************************************** */
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+//SERVE UP PUBLIC FILE
+app.use(express.static('public'));
 
 //******************************************** */
 /////////////ROUTER MIDDLEWARE///////////////////
