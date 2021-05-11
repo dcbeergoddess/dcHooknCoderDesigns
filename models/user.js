@@ -13,4 +13,4 @@ const UserSchema = new Schema({
 //THIS WILL ADD username, password to schema and make sure usernames are unique --> and give us some additional methods that we can use
 UserSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);
