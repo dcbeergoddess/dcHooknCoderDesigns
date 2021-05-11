@@ -20,7 +20,8 @@ const samplePs = [
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Baby Cardigan',
@@ -28,7 +29,8 @@ const samplePs = [
     craft: 'knit',
     yarnCategory: 'sport',
     tool: '3.75 Circular Needles',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Yoda',
@@ -36,7 +38,8 @@ const samplePs = [
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Mando',
@@ -44,7 +47,8 @@ const samplePs = [
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Dalmatian',
@@ -52,7 +56,8 @@ const samplePs = [
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Annie Afghan',
@@ -60,7 +65,8 @@ const samplePs = [
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '5.5mm Hook',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Rub-a-Dub Towel',
@@ -68,7 +74,8 @@ const samplePs = [
     craft: 'knit',
     yarnCategory: 'light worsted',
     tool: '5mm circular hooks',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Convertible Wrap',
@@ -76,7 +83,8 @@ const samplePs = [
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '5mm Hook',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Veggies',
@@ -84,7 +92,8 @@ const samplePs = [
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: '4mm Hook',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   },
   {
     title: 'Sven',
@@ -92,7 +101,8 @@ const samplePs = [
     craft: 'crochet',
     yarnCategory: 'light worsted',
     tool: '4mm Hook',
-    author: '6099d4371131b51a8290cafb'
+    author: '6099d4371131b51a8290cafb',
+    pattern: 'https://www.ravelry.com/'
   }
 ]
 
