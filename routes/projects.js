@@ -7,19 +7,30 @@ const { isLoggedIn, validateProject, isAuthor } = require('../middleware')
 //******************************************** */
 ///////////////////ROUTES////////////////////////
 //******************************************** */
-//PROJECTS INDEX - ALL PROJECTS
-router.get('/', catchAsync(projects.index));
+router.route('/')
+  .get(catchAsync(projects.index))
+  .post(isLoggedIn, 
+    validateProject, 
+    catchAsync(projects.createProject));
+
 //NEW FORM
-router.get('/new', isLoggedIn, projects.renderNewForm);
-//POST NEW PROJECT
-router.post('/', isLoggedIn, validateProject, catchAsync(projects.createProject));
-//SHOW - PROJECT DETAIL PAGE
-router.get('/:id', catchAsync(projects.showProject));
+router.get('/new', 
+  isLoggedIn, 
+  projects.renderNewForm);
+
+router.route('/:id')
+  .get(catchAsync(projects.showProject))
+  .put(isLoggedIn, 
+    isAuthor, 
+    catchAsync(projects.updateProject))
+  .delete(isLoggedIn, 
+    isAuthor, 
+    catchAsync(projects.deleteProject));
+
 //EDIT FORM
-router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(projects.renderEditForm));
-//PUT ROUTE TO UPDATE
-router.put('/:id', isLoggedIn, isAuthor, catchAsync(projects.updateProject));
-//DELETE ROUTE
-router.delete('/:id', isLoggedIn, isAuthor, catchAsync(projects.deleteProject));
+router.get('/:id/edit', 
+  isLoggedIn, 
+  isAuthor, 
+  catchAsync(projects.renderEditForm));
 
 module.exports = router;
