@@ -43,7 +43,9 @@ router.post('/', validateProject, catchAsync(async (req, res, next) => {
 //SHOW - PROJECT DETAIL PAGE
 router.get('/:id', catchAsync(async (req, res) => {
   const project = await Project.findById(req.params.id).populate('comments');
-  req.flash('error', 'Cannot Find That Campground')
+  if(!project){
+  req.flash('error', 'Cannot Find That Project')
+  }
   res.render('projects/show', { project });
 }));
 //EDIT FORM
