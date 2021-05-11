@@ -41,6 +41,7 @@
       </div>
     </div>
     <div class="col-6">
+      <% if (currentUser) { %>
       <h2>Leave a Comment</h2>
       <form action="/projects/<%=project._id%>/comments" method="POST" class="mb-3 needs-validation" novalidate>
         <div class="mb-3">
@@ -54,6 +55,7 @@
           <button class="btn btn-success">Add Comment</button>
         </div>
       </form>
+      <% } %>
       <% for( let comment of project.comments ) { %>
         <div class="card mb-3">
           <div class="card-body">

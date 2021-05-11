@@ -1,8 +1,12 @@
-const { projectSchema } = require('./schemas.js');
+const { projectSchema, commentSchema } = require('./schemas.js');
 const ExpressError = require('./utils/ExpressError');
 const Project = require('./models/project');
 const Comment = require('./models/comment');
 
+//******************************************** */
+//////////////AUTH MIDDLEWARE////////////////////
+//******************************************** */
+//USER LOGGED IN
 module.exports.isLoggedIn = (req, res, next) => {
   console.log(req.user)
   if(!req.isAuthenticated()) {
@@ -13,6 +17,21 @@ module.exports.isLoggedIn = (req, res, next) => {
   }
   next();
 };
+//PROJECT AUTHOR
+module.exports.isAuthor = async (req, res, next) => {
+  const { id } = req.params;
+  const project = await Project.findById(id);
+  if(!project.author.equals(req.user._id)) {
+    req.flash('error', 'You Do Not Have Permission To Do That!')
+    res.redirect(`/projects/${project._id}`);
+  }
+  next();
+};
+//REVIEW AUTHOR
+module.exports.isCommentAuthor = async (req, res, next) => {
+  const { id } = req.params;
+   
+}
 //******************************************** */
 //////////////JOI MIDDLEWARE/////////////////////
 //******************************************** */
@@ -27,13 +46,14 @@ module.exports.validateProject = (req, res, next) => {
     next();
   }
 };
-
-module.exports.isAuthor = async (req, res, next) => {
-  const { id } = req.params;
-  const project = await Project.findById(id);
-  if(!project.author.equals(req.user._id)) {
-    req.flash('error', 'You Do Not Have Permission To Do That!')
-    res.redirect(`/projects/${project._id}`);
+//COMMENT VALIDATION
+module.exports.validateComment = (req, res, next) => {
+  //Deconstruct error from response
+  const { error } = commentSchema.validate(req.body);
+  if(error){
+    const msg = error.details.map(el => el.message).join(',');
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
   }
-  next();
 };

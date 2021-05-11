@@ -12,6 +12,10 @@ const CommentSchema = new Schema({
 
 const CommentSchema = new Schema({
   body: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
   //timestamp
 });
 
