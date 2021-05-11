@@ -28,7 +28,12 @@ router.post('/', isLoggedIn, validateProject, catchAsync(async (req, res, next) 
 }));
 //SHOW - PROJECT DETAIL PAGE
 router.get('/:id', catchAsync(async (req, res) => {
-  const project = await Project.findById(req.params.id).populate('comments').populate('author');
+  const project = await Project.findById(req.params.id).populate({
+    path: 'comments',
+    populate: {
+      path: 'author'
+    }
+  }).populate('author');
   if(!project){
   req.flash('error', 'Cannot Find That Project')
   }
