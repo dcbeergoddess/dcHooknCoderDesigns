@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const { projectSchema } = require('../schemas.js')
+const { isLoggedIn } = require('../middleware')
 
 const ExpressError = require('../utils/ExpressError');
 const Project = require('../models/project');
@@ -29,7 +30,7 @@ router.get('/', catchAsync(async (req, res) => {
   res.render('projects/index', { projects } );
 }));
 //NEW FORM
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   res.render('projects/new')
 });
 //POST NEW PROJECT

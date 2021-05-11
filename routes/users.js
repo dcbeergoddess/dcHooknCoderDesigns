@@ -24,4 +24,22 @@ router.post('/register', catchAsync(async (req, res) => {
   }
 }));
 
+//RENDER LOGIN FORM
+router.get('/login', (req, res) => {
+  res.render('users/login')
+});
+
+//POST LOGIN 
+router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), async (req, res) => {
+  req.flash('success', 'Welcome Back!');
+  res.redirect('/projects');
+});
+
+//LOGOUT
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success', "GoodBye!")
+  res.redirect('/projects');
+});
+
 module.exports = router;
