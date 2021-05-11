@@ -19,7 +19,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
-    tool: '4mm Hook',
+    tool: 'Hook',
+    toolSize: 4,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -28,7 +29,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'knit',
     yarnCategory: 'sport',
-    tool: '3.75 Circular Needles',
+    tool: 'Circular Needles',
+    toolSize: 3.75,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -37,7 +39,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
-    tool: '4mm Hook',
+    tool: 'Hook',
+    toolSize: 4,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -46,7 +49,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
-    tool: '4mm Hook',
+    tool: 'Hook',
+    toolSize: 4,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -55,7 +59,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
-    tool: '4mm Hook',
+    tool: 'Hook',
+    toolSize: 4,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -64,7 +69,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
-    tool: '5.5mm Hook',
+    tool: 'Hook',
+    toolSize: 5.5,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -73,7 +79,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'knit',
     yarnCategory: 'light worsted',
-    tool: '5mm circular hooks',
+    tool: 'Circular Needles',
+    toolSize: 5,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -82,7 +89,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
-    tool: '5mm Hook',
+    tool: 'Hook',
+    toolSize: 5,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -91,7 +99,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'worsted',
-    tool: '4mm Hook',
+    tool: 'Hook',
+    toolSize: 4,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   },
@@ -100,7 +109,8 @@ const samplePs = [
     image: 'https://source.unsplash.com/collection/4756137',
     craft: 'crochet',
     yarnCategory: 'light worsted',
-    tool: '4mm Hook',
+    tool: 'Hook',
+    toolSize: 4,
     author: '6099d4371131b51a8290cafb',
     pattern: 'https://www.ravelry.com/'
   }
