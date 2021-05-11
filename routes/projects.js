@@ -42,10 +42,11 @@ router.post('/', validateProject, catchAsync(async (req, res, next) => {
 }));
 //SHOW - PROJECT DETAIL PAGE
 router.get('/:id', catchAsync(async (req, res) => {
-  const project = await Project.findById(req.params.id).populate('comments');
+  const project = await (await Project.findById(req.params.id).populate('comments').populate('author'));
   if(!project){
   req.flash('error', 'Cannot Find That Project')
   }
+  console.log(project)
   res.render('projects/show', { project });
 }));
 //EDIT FORM

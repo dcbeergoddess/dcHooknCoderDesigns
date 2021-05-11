@@ -9,6 +9,10 @@ const ProjectSchema = new Schema ({
   yarnCategory: String,
   tool: String,
   toolSize: Number,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   comments: [
     {
       type: Schema.Types.ObjectId,
