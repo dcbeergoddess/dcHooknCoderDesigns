@@ -29,9 +29,14 @@ module.exports.isAuthor = async (req, res, next) => {
 };
 //REVIEW AUTHOR
 module.exports.isCommentAuthor = async (req, res, next) => {
-  const { id } = req.params;
-   
-}
+  const { id, commentId } = req.params;
+  const comment = await Comment.findById(commentId);
+  if(!comment.author.equals(req.user._id)) {
+    req.flash('You Do Not Have Permission To Do That!');
+    return res.redirect(`/projects/${id}`)
+  } 
+  next();
+};
 //******************************************** */
 //////////////JOI MIDDLEWARE/////////////////////
 //******************************************** */

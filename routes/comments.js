@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { validateComment, isLoggedIn } = require('../middleware')
+const { validateComment, isLoggedIn, isCommentAuthor } = require('../middleware')
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
 
@@ -24,7 +24,7 @@ router.post('/', isLoggedIn, validateComment, catchAsync(async (req, res) => {
   res.redirect(`/projects/${project._id}`)
 }));
 //DELETE COMMENT
-router.delete('/:commentId', isLoggedIn, catchAsync(async (req, res) => {
+router.delete('/:commentId', isLoggedIn, isCommentAuthor, catchAsync(async (req, res) => {
   //DESTRUCTURE FROM REQ.PARAMS
   const { id, commentId } = req.params;
   //use $pull -> removes from array on specified condition
