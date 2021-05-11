@@ -4,19 +4,14 @@ const passport = require('passport');
 const catchAsync = require('../utils/catchAsync');
 const users = require('../controllers/users');
 
-//RENDER REGISTER FORM
-router.get('/register', users.renderRegisterForm)
+router.route('/register')
+  .get(users.renderRegisterForm)
+  .post(catchAsync(users.registerUser));
 
-//POST USER
-router.post('/register', catchAsync(users.registerUser));
+router.route('/login')
+  .get(users.renderLoginForm)
+  .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.loginUser);
 
-//RENDER LOGIN FORM
-router.get('/login', users.renderLoginForm);
-
-//POST LOGIN 
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.loginUser);
-
-//LOGOUT
 router.get('/logout', users.logoutUser);
 
 module.exports = router;
