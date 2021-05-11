@@ -36,6 +36,7 @@ router.get('/new', isLoggedIn, (req, res) => {
 //POST NEW PROJECT
 router.post('/', validateProject, catchAsync(async (req, res, next) => {
   const project = new Project(req.body.project);
+  project.author = req.user._id;
   await project.save();
   req.flash('success', 'Successfully Added a New Project!');
   res.redirect(`projects/${project._id}`);
