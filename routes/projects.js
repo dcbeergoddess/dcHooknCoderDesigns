@@ -1,66 +1,25 @@
 const express = require('express');
 const router = express.Router();
+const projects = require('../controllers/projects')
 const catchAsync = require('../utils/catchAsync');
 const { isLoggedIn, validateProject, isAuthor } = require('../middleware')
-
-const ExpressError = require('../utils/ExpressError');
-const Project = require('../models/project');
 
 //******************************************** */
 ///////////////////ROUTES////////////////////////
 //******************************************** */
 //PROJECTS INDEX - ALL PROJECTS
-router.get('/', catchAsync(async (req, res) => {
-  const projects = await Project.find({});
-  res.render('projects/index', { projects } );
-}));
+router.get('/', catchAsync(projects.index));
 //NEW FORM
-router.get('/new', isLoggedIn, (req, res) => {
-  res.render('projects/new')
-});
+router.get('/new', isLoggedIn, projects.renderNewForm);
 //POST NEW PROJECT
-router.post('/', isLoggedIn, validateProject, catchAsync(async (req, res, next) => {
-  const project = new Project(req.body.project);
-  project.author = req.user._id;
-  await project.save();
-  req.flash('success', 'Successfully Added a New Project!');
-  res.redirect(`projects/${project._id}`);
-}));
+router.post('/', isLoggedIn, validateProject, catchAsync(projects.createProject));
 //SHOW - PROJECT DETAIL PAGE
-router.get('/:id', catchAsync(async (req, res) => {
-  const project = await Project.findById(req.params.id).populate({
-    path: 'comments',
-    populate: {
-      path: 'author'
-    }
-  }).populate('author');
-  if(!project){
-  req.flash('error', 'Cannot Find That Project')
-  }
-  console.log(project)
-  res.render('projects/show', { project });
-}));
+router.get('/:id', catchAsync(projects.showProject));
 //EDIT FORM
-router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
-  const project = await Project.findById(req.params.id)
-  res.render('projects/edit', { project });
-}));
+router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(projects.renderEditForm));
 //PUT ROUTE TO UPDATE
-router.put('/:id', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const p = await Project.findById(id);
-  if(!p.author.equals(req.user._id)) {
-    req.flash('error', 'You do not have permission to do that');
-    return res.redirect(`/projects/${id}`);
-  }
-  const project = await Project.findByIdAndUpdate(id, {...req.body.project}, {new: true});
-  res.redirect(`${project._id}`)
-}));
+router.put('/:id', isLoggedIn, isAuthor, catchAsync(projects.updateProject));
 //DELETE ROUTE
-router.delete('/:id', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
-  const { id } = req.params;
-  await Project.findByIdAndDelete(id);
-  res.redirect('/projects');
-}));
+router.delete('/:id', isLoggedIn, isAuthor, catchAsync(projects.deleteProject));
 
-module.exports = router
+module.exports = router;
