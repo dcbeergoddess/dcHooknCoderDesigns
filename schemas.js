@@ -4,7 +4,7 @@ const Joi = require('joi');
 module.exports.projectSchema = Joi.object ({
   project: Joi.object({
     title: Joi.string().required(),
-    image: Joi.string().required(),
+    // image: Joi.string().required(),
     pattern: Joi.string().required(),
     craft: Joi.string().required(),
     yarnCategory: Joi.string().required(),

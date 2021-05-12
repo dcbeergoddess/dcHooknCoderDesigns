@@ -1,4 +1,5 @@
 const Project = require('../models/project');
+const { cloudinary } = require('../cloudinary')
 
 module.exports.index = async (req, res) => {
   const projects = await Project.find({});

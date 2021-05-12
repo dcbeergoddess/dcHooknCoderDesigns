@@ -4,7 +4,12 @@ const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema ({
   title: String,
-  image: String,
+  image: [
+    {
+      url: String,
+      filename: String
+    }
+  ],
   pattern: String,
   craft: String,
   yarnCategory: String,

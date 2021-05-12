@@ -4,16 +4,20 @@ const projects = require('../controllers/projects')
 const catchAsync = require('../utils/catchAsync');
 const { isLoggedIn, validateProject, isAuthor } = require('../middleware')
 
+const multer = require('multer');
+const { storage } = require('../cloudinary')
+const upload = multer({ storage });
+
 //******************************************** */
 ///////////////////ROUTES////////////////////////
 //******************************************** */
 router.route('/')
   .get(catchAsync(projects.index))
-  .post(isLoggedIn, 
+  .post(isLoggedIn,
+    upload.array('project[image]'), 
     validateProject, 
     catchAsync(projects.createProject));
 
-//NEW FORM
 router.get('/new', 
   isLoggedIn, 
   projects.renderNewForm);
@@ -27,7 +31,6 @@ router.route('/:id')
     isAuthor, 
     catchAsync(projects.deleteProject));
 
-//EDIT FORM
 router.get('/:id/edit', 
   isLoggedIn, 
   isAuthor, 
