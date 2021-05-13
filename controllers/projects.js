@@ -12,6 +12,7 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createProject = async (req, res, next) => {
   const project = new Project(req.body.project);
+  project.images = req.files.map( f => ({ url: f.path, filename: f.filename }));
   project.author = req.user._id;
   await project.save();
   req.flash('success', 'Successfully Added a New Project!');
