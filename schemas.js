@@ -10,7 +10,8 @@ module.exports.projectSchema = Joi.object ({
     yarnCategory: Joi.string().required(),
     tool: Joi.string().required(),
     toolSize: Joi.number().required().min(0)
-  }).required()
+  }).required(),
+  deleteImages: Joi.array()
 });
 
 //COMMENT VALIDATION

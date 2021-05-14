@@ -40,12 +40,16 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateProject = async (req, res) => {
   const { id } = req.params;
-  const p = await Project.findById(id);
-  if(!p.author.equals(req.user._id)) {
-    req.flash('error', 'You Do Not Have Permission To Do That!');
-    return res.redirect(`/projects/${id}`);
-  }
   const project = await Project.findByIdAndUpdate(id, {...req.body.project}, {new: true});
+  const imgs = req.files.map(f => ({ url: f.path, filename: f.filename }));
+  project.images.push(...imgs);
+  await campground.save();
+  if(req.body.deleteImages) {
+    for(let filename of req.body.dleteimages){
+      await cloudinary.uploader.destroy(filename)
+    };
+    await project.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages }}}})
+  };
   res.redirect(`${project._id}`)
 };
 

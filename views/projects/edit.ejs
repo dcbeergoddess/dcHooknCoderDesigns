@@ -1,63 +1,74 @@
-<% layout('layouts/boilerplate') %> 
-<!-- BOOTSTRAP GRID FORM -->
-<div class="row">
-  <h1 class="text-center">Edit Project</h1>
-  <div class="col-6 offset-3">
-    <form action="/projects" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
-      <div class="mb-3">
-        <label class="form-label" for="title">Title</label>
-        <input class="form-control" type="text" id="title" name="project[title]" value="<%= project.title %>" required>
-        <div class="valid-feedback">
-          Looks Good!
+<% layout('layouts/boilerplate') %>
+  <!-- BOOTSTRAP GRID FORM -->
+  <div class="row">
+    <h1 class="text-center">Edit Project</h1>
+    <div class="col-6 offset-3">
+      <form action="/projects" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label" for="title">Title</label>
+          <input class="form-control" type="text" id="title" name="project[title]" value="<%= project.title %>"
+            required>
+          <div class="valid-feedback">
+            Looks Good!
+          </div>
         </div>
-      </div>
-      <div>
-        <label class="form-label" for="craft">Craft</label>
-        <input class="form-control" type="text" id="craft" name="project[craft]" value="<%= project.craft %>" required>
-        <div class="valid-feedback">
-          Looks Good!
+        <div>
+          <label class="form-label" for="craft">Craft</label>
+          <input class="form-control" type="text" id="craft" name="project[craft]" value="<%= project.craft %>"
+            required>
+          <div class="valid-feedback">
+            Looks Good!
+          </div>
         </div>
-      </div>
-      <div>
-        <label class="form-label" for="pattern">Pattern URL:</label>
-        <input class="form-control" type="text" id="pattern" name="project[pattern]" value="<%= project.pattern %>" required>
-        <div class="valid-feedback">
-          Looks Good!
+        <div>
+          <label class="form-label" for="pattern">Pattern URL:</label>
+          <input class="form-control" type="text" id="pattern" name="project[pattern]" value="<%= project.pattern %>"
+            required>
+          <div class="valid-feedback">
+            Looks Good!
+          </div>
         </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label" or="yarnCategory">Yarn Weight Category</label>
-        <input class="form-control" type="text" id="yarnCategory" name="project[yarnCategory]" value="<%= project.yarnCategory %>" required>
-        <div class="valid-feedback">
-          Looks Good!
+        <div class="mb-3">
+          <label class="form-label" or="yarnCategory">Yarn Weight Category</label>
+          <input class="form-control" type="text" id="yarnCategory" name="project[yarnCategory]"
+            value="<%= project.yarnCategory %>" required>
+          <div class="valid-feedback">
+            Looks Good!
+          </div>
         </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="tool">Project Tool</label>
-        <input class="form-control" type="text" id="tool" name="project[tool]" value="<%= project.tool %>" required>
-        <div class="valid-feedback">
-          Looks Good!
+        <div class="mb-3">
+          <label class="form-label" for="tool">Project Tool</label>
+          <input class="form-control" type="text" id="tool" name="project[tool]" value="<%= project.tool %>" required>
+          <div class="valid-feedback">
+            Looks Good!
+          </div>
         </div>
-      </div>
-    <div class="mb-3">
-      <label class="form-label" for="toolSize">Project Tool Size:</label>
-      <div class="input-group">
-        <input type="text" class="form-control" id="toolSize" name="project[toolSize]"placeholder="0" aria-label="toolSize" aria-describedby="toolSize-label" value="<%= project.toolSize %>" required>
-        <span class="input-group-text" id="toolSize-label">mm</span>
-        <div class="valid-feedback">
-          Looks Good!
+        <div class="mb-3">
+          <label class="form-label" for="toolSize">Project Tool Size:</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="toolSize" name="project[toolSize]" placeholder="0"
+              aria-label="toolSize" aria-describedby="toolSize-label" value="<%= project.toolSize %>" required>
+            <span class="input-group-text" id="toolSize-label">mm</span>
+            <div class="valid-feedback">
+              Looks Good!
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="input-group mb-3">
-        <input type="file" class="form-control" id="project[image]" name="project[image]" multiple>
-        <label class="input-group-text" for="project[image]">Upload Images</label>
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" id="project[image]" name="project[image]" multiple>
+          <label class="input-group-text" for="project[image]">Upload Images: Max = 3</label>
+        </div>
+        <% project.images.forEach((img, i) => { %>
+          <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+          <div class="form-check-inline">
+            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+          </div>
+          <label for="image-<%=i%>">Delete?</label>
+        <% }) %>
+        <div class="mb-3">
+          <button class="btn btn-info">Update Project</button>
+        </div>
+      </form>
+      <a href="/projects/<%= project.id %> ">Back to Project</a>
     </div>
-    </div>
-      <div class="mb-3">
-        <button class="btn btn-info">Update Project</button>
-      </div>
-    </form>
-    <a href="/projects/<%= project.id %> ">Back to Project</a>
   </div>
-</div>
-
