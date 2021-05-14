@@ -14,7 +14,7 @@ const upload = multer({ storage });
 router.route('/')
   .get(catchAsync(projects.index))
   .post(isLoggedIn,
-    upload.array('project[image]'), 
+    upload.array('project[image]', 3), 
     validateProject, 
     catchAsync(projects.createProject));
 
@@ -25,7 +25,8 @@ router.get('/new',
 router.route('/:id')
   .get(catchAsync(projects.showProject))
   .put(isLoggedIn, 
-    isAuthor, 
+    isAuthor,
+    upload.array('project[image]', 3),  
     catchAsync(projects.updateProject))
   .delete(isLoggedIn, 
     isAuthor, 
