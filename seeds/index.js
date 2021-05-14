@@ -16,7 +16,16 @@ db.once('open', () => {
 const samplePs = [
   {
     title: 'Rubber Duck',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620938566/HooknCoderDesigns/xvs6jbya9j27r2znjr5k.png',
+        filename: 'HooknCoderDesigns/xvs6jbya9j27r2znjr5k'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1619476221/HooknCoderDesigns/gehzdoz6zi9yrdwehslg.jpg',
+        filename: 'HooknCoderDesigns/gehzdoz6zi9yrdwehslg'
+      }
+    ],
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: 'Hook',
@@ -26,7 +35,16 @@ const samplePs = [
   },
   {
     title: 'Baby Cardigan',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620938564/HooknCoderDesigns/hla0uqhtecwqhyhyflcb.jpg',
+        filename: 'HooknCoderDesigns/hla0uqhtecwqhyhyflcb'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933319/HooknCoderDesigns/fdjvxw02yslzinmzw7wd.jpg',
+        filename: 'HooknCoderDesigns/fdjvxw02yslzinmzw7wd'
+      }
+    ],
     craft: 'knit',
     yarnCategory: 'sport',
     tool: 'Circular Needles',
@@ -36,7 +54,16 @@ const samplePs = [
   },
   {
     title: 'Yoda',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620938562/HooknCoderDesigns/mqkbrexf8qfepu682jx0.jpg',
+        filename: 'HooknCoderDesigns/mqkbrexf8qfepu682jx0'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933319/HooknCoderDesigns/fdjvxw02yslzinmzw7wd.jpg',
+        filename: 'HooknCoderDesigns/fdjvxw02yslzinmzw7wd'
+      }
+    ],
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: 'Hook',
@@ -46,8 +73,16 @@ const samplePs = [
   },
   {
     title: 'Mando',
-    image: 'https://source.unsplash.com/collection/4756137',
-    craft: 'crochet',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620938818/HooknCoderDesigns/vhwwzjfvuutbodnt50qh.jpg',
+        filename: 'HooknCoderDesigns/vhwwzjfvuutbodnt50qh'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933319/HooknCoderDesigns/fdjvxw02yslzinmzw7wd.jpg',
+        filename: 'HooknCoderDesigns/fdjvxw02yslzinmzw7wd'
+      }
+    ],    craft: 'crochet',
     yarnCategory: 'worsted',
     tool: 'Hook',
     toolSize: 4,
@@ -56,7 +91,16 @@ const samplePs = [
   },
   {
     title: 'Dalmatian',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620938568/HooknCoderDesigns/lje2plsvt68b21w2qn1d.jpg',
+        filename: 'HooknCoderDesigns/lje2plsvt68b21w2qn1d'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933319/HooknCoderDesigns/fdjvxw02yslzinmzw7wd.jpg',
+        filename: 'HooknCoderDesigns/fdjvxw02yslzinmzw7wd'
+      }
+    ],
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: 'Hook',
@@ -66,7 +110,16 @@ const samplePs = [
   },
   {
     title: 'Annie Afghan',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933318/HooknCoderDesigns/mgdltyuijus7jxdeigxj.jpg',
+        filename: 'HooknCoderDesigns/mgdltyuijus7jxdeigxj'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933319/HooknCoderDesigns/fdjvxw02yslzinmzw7wd.jpg',
+        filename: 'HooknCoderDesigns/fdjvxw02yslzinmzw7wd'
+      }
+    ],
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: 'Hook',
@@ -76,7 +129,16 @@ const samplePs = [
   },
   {
     title: 'Rub-a-Dub Towel',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933318/HooknCoderDesigns/mgdltyuijus7jxdeigxj.jpg',
+        filename: 'HooknCoderDesigns/mgdltyuijus7jxdeigxj'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933319/HooknCoderDesigns/fdjvxw02yslzinmzw7wd.jpg',
+        filename: 'HooknCoderDesigns/fdjvxw02yslzinmzw7wd'
+      }
+    ],
     craft: 'knit',
     yarnCategory: 'light worsted',
     tool: 'Circular Needles',
@@ -86,7 +148,16 @@ const samplePs = [
   },
   {
     title: 'Convertible Wrap',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620938569/HooknCoderDesigns/shxuoeftczjjhi0im0ol.jpg',
+        filename: 'HooknCoderDesigns/shxuoeftczjjhi0im0ol'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933319/HooknCoderDesigns/fdjvxw02yslzinmzw7wd.jpg',
+        filename: 'HooknCoderDesigns/fdjvxw02yslzinmzw7wd'
+      }
+    ],
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: 'Hook',
@@ -96,7 +167,16 @@ const samplePs = [
   },
   {
     title: 'Veggies',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620938563/HooknCoderDesigns/p9sly6merzz02wasmbxp.jpg',
+        filename: 'HooknCoderDesigns/p9sly6merzz02wasmbxp'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620939027/HooknCoderDesigns/imzgabpbrergyqonrsvd.jpg',
+        filename: 'HooknCoderDesigns/imzgabpbrergyqonrsvd'
+      }
+    ],
     craft: 'crochet',
     yarnCategory: 'worsted',
     tool: 'Hook',
@@ -106,7 +186,16 @@ const samplePs = [
   },
   {
     title: 'Sven',
-    image: 'https://source.unsplash.com/collection/4756137',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620938818/HooknCoderDesigns/vhwwzjfvuutbodnt50qh.jpg',
+        filename: 'HooknCoderDesigns/vhwwzjfvuutbodnt50qh'
+      },
+      {
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1620933319/HooknCoderDesigns/fdjvxw02yslzinmzw7wd.jpg',
+        filename: 'HooknCoderDesigns/fdjvxw02yslzinmzw7wd'
+      }
+    ],
     craft: 'crochet',
     yarnCategory: 'light worsted',
     tool: 'Hook',
