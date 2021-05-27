@@ -1,15 +1,10 @@
 <% layout('layouts/boilerplate') %> 
   <h1>All Projects</h1>
-  <div>
-    <a href="/projects/new">Add New Project</a>
-  </div>
 
     <% for( let project of projects ) { %>
-      <div class="card mb-3">
+      <div class="card mb-3" style="width: 18rem;">
+        <img src="<%=project.images[0].url%>" alt="" class="img-fluid card-img-top" alt="image of project">
         <div class="row">
-          <div class="col-md-4">
-            <img src="<%=project.images[0].url%>" alt="" class="img-fluid">
-          </div>
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title"><%= project.title %></h5>
