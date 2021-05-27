@@ -22,8 +22,8 @@ const samplePs = [
         filename: 'HooknCoderDesigns/xvs6jbya9j27r2znjr5k'
       },
       {
-        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1619476221/HooknCoderDesigns/gehzdoz6zi9yrdwehslg.jpg',
-        filename: 'HooknCoderDesigns/gehzdoz6zi9yrdwehslg'
+        url: 'https://res.cloudinary.com/dc03tm19jx/image/upload/v1619476221/HooknCoderDesigns/usskamvgahxibbtbrony.jpg',
+        filename: 'HooknCoderDesigns/gusskamvgahxibbtbrony'
       }
     ],
     craft: 'crochet',
