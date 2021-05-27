@@ -1,6 +1,6 @@
 body {
   height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5)),
+  background-image: linear-gradient(rgba(107, 1, 1, 0.5), rgba(0, 0, 0, 0.5)),
   url("https://images.unsplash.com/photo-1595301490405-0ae747be39f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1332&q=80");
   background-size: cover;
   background-position: center;
@@ -17,7 +17,7 @@ h1 {
 }
 
 .user-form {
-  width: 50%; 
+  width: 30%; 
   margin: 20px auto;
 }
 
