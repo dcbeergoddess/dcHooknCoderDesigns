@@ -15,6 +15,7 @@ const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 //SECURITY
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 
 //ROUTERS
 const projectRoutes = require('./routes/projects');
@@ -72,6 +73,44 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(helmet());
+//HELMET FOR THIS PROJECT/APIS
+const scriptSrcUrls = [
+  "https://stackpath.bootstrapcdn.com/",
+  "https://kit.fontawesome.com/",
+  "https://cdnjs.cloudflare.com/",
+  "https://cdn.jsdelivr.net",
+];
+const styleSrcUrls = [
+  "https://kit-free.fontawesome.com/",
+  "https://stackpath.bootstrapcdn.com/",
+  "https://fonts.googleapis.com/",
+  "https://use.fontawesome.com/",
+  "https://cdn.jsdelivr.net/",
+];
+const connectSrcUrls = [];
+const fontSrcUrls = [];
+
+app.use(
+  helmet.contentSecurityPolicy({
+      directives: {
+          defaultSrc: [],
+          connectSrc: ["'self'", ...connectSrcUrls],
+          scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+          styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+          workerSrc: ["'self'", "blob:"],
+          objectSrc: [],
+          imgSrc: [
+              "'self'",
+              "blob:",
+              "data:",
+              "https://res.cloudinary.com/dc03tm19jx/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
+              "https://images.unsplash.com/",
+          ],
+          fontSrc: ["'self'", ...fontSrcUrls],
+      },
+  })
+);
 //******************************************** */
 ///////////PASSPORT MIDDLEWARE///////////////////
 //******************************************** */
@@ -93,12 +132,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// //NEW USER DEMONSTRATION
-// app.get('/fakeUser', async (req, res) => {
-//   const user = new User({email: 'rachel@gmail.com', username: 'rrrrachel'});
-//   const newUser = await User.register(user, 'jasmine');
-//   res.send(newUser);
-// });
 
 //******************************************** */
 /////////////ROUTER MIDDLEWARE///////////////////
