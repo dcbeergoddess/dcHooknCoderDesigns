@@ -13,6 +13,8 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+//SECURITY
+const mongoSanitize = require('express-mongo-sanitize');
 
 //ROUTERS
 const projectRoutes = require('./routes/projects');
@@ -46,6 +48,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 //SERVE UP PUBLIC FILE
 app.use(express.static(path.join(__dirname, 'public')));
+//SECURITY
+app.use(mongoSanitize({
+  replaceWith: '_'
+}))
 
 //******************************************** */
 ////////////SESSION MIDDLEWARE///////////////////
