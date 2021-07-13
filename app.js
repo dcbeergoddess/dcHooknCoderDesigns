@@ -20,9 +20,13 @@ const helmet = require('helmet');
 //ROUTERS
 const projectRoutes = require('./routes/projects');
 const commentRoutes = require('./routes/comments');
-const userRoutes = require('./routes/users')
+const userRoutes = require('./routes/users');
 
-mongoose.connect('mongodb://localhost:27017/hook-coder-designs', {
+//MONGO
+const MongoStore = require('connect-mongo');
+
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/hook-coder-designs';
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -52,19 +56,34 @@ app.use(express.static(path.join(__dirname, 'public')));
 //SECURITY
 app.use(mongoSanitize({
   replaceWith: '_'
-}))
+}));
+
+//SECRET
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
+//MONGO STORE
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  secret,
+  touchAfter: 24 * 60 * 60
+});
+
+store.on('error', function(e) {
+  console.log("SESSION STORE ERROR", e)
+});
 
 //******************************************** */
 ////////////SESSION MIDDLEWARE///////////////////
 //******************************************** */
 const sessionConfig = {
+  store,
   name: 'session',
-  secret: 'thishouldbeabettersecret!',
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: { 
     httpOnly: true,
-    //secure: true,
+    // secure: true,
     //expire after week
     // Date.now() + milliseconds * seconds * minutes * hours * days
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
