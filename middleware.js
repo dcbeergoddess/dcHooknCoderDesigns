@@ -21,22 +21,23 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.isAuthor = async (req, res, next) => {
   const { id } = req.params;
   const project = await Project.findById(id);
-  if(!project.author.equals(req.user._id)) {
+  if(!project.author.equals(req.user._id) || !req.user.isAdmin) {
     req.flash('error', 'You Do Not Have Permission To Do That!')
     res.redirect(`/projects/${project._id}`);
-  }
+  } 
   next();
 };
 //REVIEW AUTHOR
 module.exports.isCommentAuthor = async (req, res, next) => {
   const { id, commentId } = req.params;
   const comment = await Comment.findById(commentId);
-  if(!comment.author.equals(req.user._id)) {
+  if(!comment.author.equals(req.user._id) || !req.user.isAdmin) {
     req.flash('You Do Not Have Permission To Do That!');
     return res.redirect(`/projects/${id}`)
   } 
   next();
 };
+
 //******************************************** */
 //////////////JOI MIDDLEWARE/////////////////////
 //******************************************** */
