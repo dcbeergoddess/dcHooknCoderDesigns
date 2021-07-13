@@ -57,11 +57,13 @@ app.use(mongoSanitize({
 ////////////SESSION MIDDLEWARE///////////////////
 //******************************************** */
 const sessionConfig = {
+  name: 'session',
   secret: 'thishouldbeabettersecret!',
   resave: false,
   saveUninitialized: true,
   cookie: { 
     httpOnly: true,
+    //secure: true,
     //expire after week
     // Date.now() + milliseconds * seconds * minutes * hours * days
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
