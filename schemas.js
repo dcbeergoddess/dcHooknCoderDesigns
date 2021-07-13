@@ -41,6 +41,6 @@ module.exports.projectSchema = Joi.object ({
 //COMMENT VALIDATION
 module.exports.commentSchema = Joi.object({
   comment: Joi.object({
-    body: Joi.string().required()
+    body: Joi.string().required().escapeHTML()
   }).required()
 });
