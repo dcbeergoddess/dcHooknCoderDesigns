@@ -40,7 +40,6 @@ db.once('open', () => {
 });
 
 const app = express();
-const PORT = 8080
 
 app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
@@ -183,6 +182,7 @@ app.use((err, req, res, next) => {
 //******************************************** */
 /////////////////LISTENER////////////////////////
 //******************************************** */
-app.listen(PORT, () => {
-  console.log(`LISTENING ON http://localhost:${PORT}` )
+const port = process.env.PORT || 8080
+app.listen(port, () => {
+  console.log(`LISTENING ON http://localhost:${port}` )
 }); 
