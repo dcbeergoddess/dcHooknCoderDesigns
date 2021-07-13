@@ -8,6 +8,9 @@ module.exports.registerUser = async (req, res) => {
   try {
   const { email, username, password } = req.body;
   const user = new User({ email, username });
+  if(req.body.admin === process.env.SECRETCODE ) {
+    user.isAdmin = true;
+  }
   const registeredUser = await User.register(user, password);
   // console.log(registeredUser);
   //KEEP USER LOGGED IN AFTER REGISTERING--> passport helper method `login()`

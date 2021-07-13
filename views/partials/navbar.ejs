@@ -8,7 +8,11 @@
       <div class="navbar-nav">
         <a class="nav-link" href="/">Home</a>
         <a class="nav-link" href="/projects">Projects</a>
-        <a class="nav-link" href="/projects/new">Add Project</a>
+        <!-- <a class="nav-link" href="/yarns">Yarn Inventory</a> -->
+        <% if (currentUser && currentUser.isAdmin) { %>
+          <a class="nav-link" href="/projects/new">Add Project</a>
+          <!-- <a class="nav-link" href="/yarns/new">Add Yarn</a> -->
+        <% } %>
       </div>
       <div class="navbar-nav" style="margin-left: auto;">
         <% if (!currentUser) { %>
