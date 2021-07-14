@@ -20,5 +20,6 @@ module.exports.deleteComment = async (req, res) => {
   //use $pull -> removes from array on specified condition
   await Project.findByIdAndUpdate(id, { $pull: { comments: commentId } });
   await Comment.findByIdAndDelete(commentId);
+  req.flash('success', 'Successfully deleted comment')
   res.redirect(`/projects/${id}`);
 };

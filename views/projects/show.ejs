@@ -78,11 +78,11 @@
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">Comment</h5>
-            <h6 class="card-subtitle mb-2 text-muted">By <%= project.author.username %> </h6>
+            <h6 class="card-subtitle mb-2 text-muted">By <%= comment.author.username %> </h6>
             <p class="card-text">
               <%= comment.body %>
             </p>
-            <% if (currentUser && project.author.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+            <% if (currentUser && comment.author.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
             <form action="/projects/<%=project._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
               <button class="btn btn-sm btn-danger">Delete</button>
             </form>
