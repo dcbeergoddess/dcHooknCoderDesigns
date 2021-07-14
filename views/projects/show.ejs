@@ -82,7 +82,7 @@
             <p class="card-text">
               <%= comment.body %>
             </p>
-            <% if (currentUser && comment.author.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
+            <% if (currentUser && comment.author.equals(currentUser._id)) { %>
             <form action="/projects/<%=project._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
               <button class="btn btn-sm btn-danger">Delete</button>
             </form>
