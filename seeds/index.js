@@ -31,7 +31,7 @@ const samplePs = [
     tool: 'Hook',
     toolSize: 4,
     author: '6099d4371131b51a8290cafb',
-    pattern: 'https://www.ravelry.com/'
+    pattern: 'https://www.ravelry.com/patterns/library/yellow-rubber-duck'
   },
   {
     title: 'Baby Cardigan',
