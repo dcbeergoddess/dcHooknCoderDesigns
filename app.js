@@ -1,6 +1,6 @@
-if(process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
-};
+}
 
 const express = require('express');
 const path = require('path');
@@ -25,7 +25,8 @@ const userRoutes = require('./routes/users');
 //MONGO
 const MongoStore = require('connect-mongo');
 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/hook-coder-designs';
+const dbUrl =
+  process.env.DB_URL || 'mongodb://localhost:27017/hook-coder-designs';
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -36,7 +37,7 @@ mongoose.connect(dbUrl, {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log('Database Connected')
+  console.log('Database Connected');
 });
 
 const app = express();
@@ -48,14 +49,16 @@ app.set('view engine', 'ejs');
 //******************************************** */
 ///////////MONGOOSE MIDDLEWARE///////////////////
 //******************************************** */
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 //SERVE UP PUBLIC FILE
 app.use(express.static(path.join(__dirname, 'public')));
 //SECURITY
-app.use(mongoSanitize({
-  replaceWith: '_'
-}));
+app.use(
+  mongoSanitize({
+    replaceWith: '_'
+  })
+);
 
 //SECRET
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
@@ -67,8 +70,8 @@ const store = MongoStore.create({
   touchAfter: 24 * 60 * 60
 });
 
-store.on('error', function(e) {
-  console.log("SESSION STORE ERROR", e)
+store.on('error', function (e) {
+  console.log('SESSION STORE ERROR', e);
 });
 
 //******************************************** */
@@ -80,7 +83,7 @@ const sessionConfig = {
   secret,
   resave: false,
   saveUninitialized: true,
-  cookie: { 
+  cookie: {
     httpOnly: true,
     // secure: true,
     //expire after week
@@ -94,39 +97,39 @@ app.use(flash());
 app.use(helmet());
 //HELMET FOR THIS PROJECT/APIS
 const scriptSrcUrls = [
-  "https://stackpath.bootstrapcdn.com/",
-  "https://kit.fontawesome.com/",
-  "https://cdnjs.cloudflare.com/",
-  "https://cdn.jsdelivr.net",
+  'https://stackpath.bootstrapcdn.com/',
+  'https://kit.fontawesome.com/',
+  'https://cdnjs.cloudflare.com/',
+  'https://cdn.jsdelivr.net'
 ];
 const styleSrcUrls = [
-  "https://kit-free.fontawesome.com/",
-  "https://stackpath.bootstrapcdn.com/",
-  "https://fonts.googleapis.com/",
-  "https://use.fontawesome.com/",
-  "https://cdn.jsdelivr.net/",
+  'https://kit-free.fontawesome.com/',
+  'https://stackpath.bootstrapcdn.com/',
+  'https://fonts.googleapis.com/',
+  'https://use.fontawesome.com/',
+  'https://cdn.jsdelivr.net/'
 ];
 const connectSrcUrls = [];
 const fontSrcUrls = [];
 
 app.use(
   helmet.contentSecurityPolicy({
-      directives: {
-          defaultSrc: [],
-          connectSrc: ["'self'", ...connectSrcUrls],
-          scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-          styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-          workerSrc: ["'self'", "blob:"],
-          objectSrc: [],
-          imgSrc: [
-              "'self'",
-              "blob:",
-              "data:",
-              "https://res.cloudinary.com/dc03tm19jx/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! 
-              "https://images.unsplash.com/",
-          ],
-          fontSrc: ["'self'", ...fontSrcUrls],
-      },
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", 'blob:'],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        'blob:',
+        'data:',
+        'https://res.cloudinary.com/dc03tm19jx/', //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        'https://images.unsplash.com/'
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls]
+    }
   })
 );
 //******************************************** */
@@ -141,8 +144,8 @@ passport.deserializeUser(User.deserializeUser()); //Take out of session
 
 //ADDITIONAL MIDDLEWARE FOR EVERY REQUEST
 app.use((req, res, next) => {
-  if(!['/login', '/'].includes(req.originalUrl)) {
-    req.session.returnTo = req.originalUrl
+  if (!['/login', '/'].includes(req.originalUrl)) {
+    req.session.returnTo = req.originalUrl;
   }
   res.locals.currentUser = req.user;
   res.locals.success = req.flash('success');
@@ -150,14 +153,12 @@ app.use((req, res, next) => {
   next();
 });
 
-
 //******************************************** */
 /////////////ROUTER MIDDLEWARE///////////////////
 //******************************************** */
-app.use('/', userRoutes)
+app.use('/', userRoutes);
 app.use('/projects', projectRoutes);
 app.use('/projects/:id/comments', commentRoutes);
-
 
 //HOME PAGE ROUTE
 app.get('/', (req, res) => {
@@ -168,7 +169,7 @@ app.get('/', (req, res) => {
 /////////////BASIC 404 ERROR/////////////////////
 //******************************************** */
 app.all('*', (req, res, next) => {
-  next(new ExpressError('Page Not Found', 404))
+  next(new ExpressError('Page Not Found', 404));
 });
 
 //******************************************** */
@@ -176,13 +177,13 @@ app.all('*', (req, res, next) => {
 //******************************************** */
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
-  if(!err.message) err.message = 'Oh No, Something Went Wrong!'
+  if (!err.message) err.message = 'Oh No, Something Went Wrong!';
   res.status(statusCode).render('error', { err });
 });
 //******************************************** */
 /////////////////LISTENER////////////////////////
 //******************************************** */
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`LISTENING ON http://localhost:${port}` )
-}); 
+  console.log(`LISTENING ON http://localhost:${port}`);
+});
